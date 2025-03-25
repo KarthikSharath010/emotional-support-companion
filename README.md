@@ -1,7 +1,7 @@
 # 🌟 Emotional Support Companion - Anonymous AI-Powered Social Platform
 
 ## 📖 Project Overview
-This project was developed as part of **IVIS Labs Promptathon 2025**.
+This project was developed as part of **Simba GPT Promptathon 2025**.
 
 The **Emotional Support Companion** is an anonymous web-based platform designed to provide users with a safe space to express their emotions and receive empathetic AI-generated responses. The platform leverages prompt engineering and **Gemini AI Model integration** to generate context-aware, emotionally supportive replies.
 
