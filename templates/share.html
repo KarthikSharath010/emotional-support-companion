@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Share Your Experience</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container1">
+        <header class="h1">
+            <h1>Share Your Experience</h1>
+        </header>
+
+        <main>
+            <form id="postForm">
+                <!-- Textarea -->
+                <div class="form-group">
+                    
+                    <textarea id="content" name="content"placeholder="Share your stories here"></textarea>
+                </div>
+
+                <button type="submit">Share Anonymously</button>
+            </form>
+
+            <!-- Response Section -->
+            <div id="responseSection" class="hidden">
+                <div class="response-card">
+                    <h3>AI Response</h3>
+                    <p id="aiResponse"></p>
+                    <h3>Suggestions For You</h3>
+                    <ul id="suggestions"></ul>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

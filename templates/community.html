@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Support</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .posts-grid {
+            display: flex;
+            flex-wrap: wrap; /* Ensures posts wrap instead of overflowing */
+            gap: 15px; /* Adds spacing between posts */
+            justify-content: center; /* Centers posts horizontally */
+        }
+
+        .post-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            width: 300px; /* Set a fixed width for consistency */
+            min-height: 200px; /* Ensures uniform height */
+            flex-grow: 1; /* Allows cards to fill space evenly */
+        }
+
+        .suggestions {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Community Support</h1>
+            <p>Read anonymous experiences from others</p>
+        </header>
+        <main>
+            <div id="postsContainer" class="posts-grid">
+                <p>Loading posts...</p>
+            </div>
+            <div class="cta-section">
+                <a href="/share" class="btn btn-primary">Share Your Own Experience</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const postsContainer = document.getElementById("postsContainer");
+
+            async function fetchPosts() {
+                try {
+                    const response = await fetch("/api/get_response");
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch responses: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+
+                    if (!Array.isArray(data) || data.length === 0) {
+                        postsContainer.innerHTML = "<p>No posts available.</p>";
+                        return;
+                    }
+
+                    renderPosts(data);
+                } catch (error) {
+                    console.error("Error fetching posts:", error);
+                    postsContainer.innerHTML = "<p>Could not load posts. Please try again later.</p>";
+                }
+            }
+
+            function renderPosts(posts) {
+                postsContainer.innerHTML = ""; // Clear previous content
+                posts.forEach(post => {
+                    const postCard = document.createElement("div");
+                    postCard.classList.add("post-card");
+                    postCard.innerHTML = `
+                        <h3>Anonymous</h3>
+                        <p><strong>Story:</strong> ${post.story}</p>
+                        <p><strong>AI Response:</strong> ${post.ai_response}</p>
+                        <div class="suggestions">
+                            <strong>Suggestions:</strong>
+                            <ul>
+                                ${post.suggestions.map(s => `<li>${s}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                    postsContainer.appendChild(postCard);
+                });
+            }
+
+            // Fetch posts on page load
+            fetchPosts();
+        });
+    </script>
+</body>
+</html>
