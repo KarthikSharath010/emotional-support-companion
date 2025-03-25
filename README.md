@@ -26,7 +26,3 @@ The **Emotional Support Companion** is an anonymous web-based platform designed 
 - **Gemini AI Model** - AI response generation using API keys
 - **Uvicorn** - ASGI server for running the application
 - **dotenv** - To manage environment variables securely
-
----
-
-## 📂 Project Structure
